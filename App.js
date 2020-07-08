@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import Svg, { Circle, Line } from 'react-native-svg';
 import * as tf from '@tensorflow/tfjs';
 import '@tensorflow/tfjs-react-native';
 import * as handpose from '@tensorflow-models/handpose';
@@ -13,11 +14,10 @@ let frameCount = 0;
 const makePredictionEveryNFrames = 3;
 
 // Position of camera preview.
-const previewLeft = 40;
-const previewTop = 40;
+const previewLeft = 0;
+const previewTop = 0;
 const previewWidth = 290;
-const previewHeight = 440;
-
+const previewHeight = 500;
 
 export default class App extends React.Component {
   constructor(props) {
@@ -46,11 +46,14 @@ export default class App extends React.Component {
     } else {
       textureDims = { height: 1200, width: 1600 };
     }
-    const tensorDims = {height: 300, width: 400 };
+    //const tensorDims = {height: 300, width: 400 };
+    const tensorDims = {height: 500, width: 290 };
 
     const scale = {
-      height: styles.camera.height / tensorDims.height,
-      width: styles.camera.width / tensorDims.width,
+      //height: styles.camera.height / tensorDims.height,
+      //width: styles.camera.width / tensorDims.width,
+      height: 1,
+      width: 1,
     }
 
     const handposeModel = await this.loadHandposeModel();
@@ -62,7 +65,6 @@ export default class App extends React.Component {
       textureDims,
       tensorDims,
       scale,
-
     });
   }
 
@@ -76,7 +78,6 @@ export default class App extends React.Component {
             imageTensor, returnTensors);
           tf.dispose(imageTensor);          
           this.setState({hands});
-          //console.log(hands);
         }
       }
       frameCount += 1;
@@ -104,21 +105,77 @@ export default class App extends React.Component {
   }
 
   renderHandsDebugInfo() {
-    const {hands} = this.state;
+    const {hands, scale, textureDims} = this.state;
     
     return hands.map((hand, i) => {
-    console.log(hand);
-    //   const {topLeft, bottomRight, probability} = face;
+      // const {topLeft, bottomRight, probability} = face;
+      // Render landmarks 
       
-       return <Text style={styles.textContainer} key={`faceInfo${i}`}>
-         is hand probability: {hand.handInViewConfidence} | 
-         {
-         /* 
-         TL: [{topLeft[0].toFixed(1)}, {topLeft[1].toFixed(1)}] |
-          BR: [{bottomRight[0].toFixed(1)}, {bottomRight[1].toFixed(1)}]
-        */
-        }
-         </Text>
+
+      //console.log(hand);
+      const rate = 1;
+      
+       return <>
+          <Svg height={previewHeight} width={previewWidth} viewBox={`0 0 290 440`} style={{ position: 'absolute', top: previewTop, left: previewLeft, opacity: 0.5}}>
+            <Circle cx={hand.landmarks[0][0] * rate} cy={hand.landmarks[0][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            <Circle cx={hand.landmarks[1][0] * rate} cy={hand.landmarks[1][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            <Circle cx={hand.landmarks[2][0] * rate} cy={hand.landmarks[2][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            <Circle cx={hand.landmarks[3][0] * rate} cy={hand.landmarks[3][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            <Circle cx={hand.landmarks[4][0] * rate} cy={hand.landmarks[4][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            <Circle cx={hand.landmarks[5][0] * rate} cy={hand.landmarks[5][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            <Circle cx={hand.landmarks[6][0] * rate} cy={hand.landmarks[6][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            <Circle cx={hand.landmarks[7][0] * rate} cy={hand.landmarks[7][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            <Circle cx={hand.landmarks[8][0] * rate} cy={hand.landmarks[8][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            <Circle cx={hand.landmarks[9][0] * rate} cy={hand.landmarks[9][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            <Circle cx={hand.landmarks[10][0] * rate} cy={hand.landmarks[10][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            <Circle cx={hand.landmarks[11][0] * rate} cy={hand.landmarks[11][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            <Circle cx={hand.landmarks[12][0] * rate} cy={hand.landmarks[12][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            <Circle cx={hand.landmarks[13][0] * rate} cy={hand.landmarks[13][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            <Circle cx={hand.landmarks[14][0] * rate} cy={hand.landmarks[14][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            <Circle cx={hand.landmarks[15][0] * rate} cy={hand.landmarks[15][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            <Circle cx={hand.landmarks[16][0] * rate} cy={hand.landmarks[16][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            <Circle cx={hand.landmarks[17][0] * rate} cy={hand.landmarks[17][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            <Circle cx={hand.landmarks[18][0] * rate} cy={hand.landmarks[18][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            <Circle cx={hand.landmarks[19][0] * rate} cy={hand.landmarks[19][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            <Circle cx={hand.landmarks[20][0] * rate} cy={hand.landmarks[20][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+            {/* indexFinger */}
+            <Line x1={hand.annotations.indexFinger[0][0]} y1={hand.annotations.indexFinger[0][0]} x2={hand.annotations.indexFinger[0][1]} y2={hand.annotations.indexFinger[0][1]} style={{stroke:'green', strokeWidth:2}} />
+            <Line x1={hand.annotations.indexFinger[1][0]} y1={hand.annotations.indexFinger[1][0]} x2={hand.annotations.indexFinger[1][1]} y2={hand.annotations.indexFinger[1][1]} style={{stroke:'green', strokeWidth:2}} />
+            <Line x1={hand.annotations.indexFinger[2][0]} y1={hand.annotations.indexFinger[2][0]} x2={hand.annotations.indexFinger[2][1]} y2={hand.annotations.indexFinger[2][1]} style={{stroke:'green', strokeWidth:2}} />
+            <Line x1={hand.annotations.indexFinger[3][0]} y1={hand.annotations.indexFinger[3][0]} x2={hand.annotations.indexFinger[3][1]} y2={hand.annotations.indexFinger[3][1]} style={{stroke:'green', strokeWidth:2}} />
+            {/* middleFinger */}
+            <Line x1={hand.annotations.middleFinger[0][0]} y1={hand.annotations.middleFinger[0][0]} x2={hand.annotations.middleFinger[0][1]} y2={hand.annotations.middleFinger[0][1]} style={{stroke:'green', strokeWidth:2}} />
+            <Line x1={hand.annotations.middleFinger[1][0]} y1={hand.annotations.middleFinger[1][0]} x2={hand.annotations.middleFinger[1][1]} y2={hand.annotations.middleFinger[1][1]} style={{stroke:'green', strokeWidth:2}} />
+            <Line x1={hand.annotations.middleFinger[2][0]} y1={hand.annotations.middleFinger[2][0]} x2={hand.annotations.middleFinger[2][1]} y2={hand.annotations.middleFinger[2][1]} style={{stroke:'green', strokeWidth:2}} />
+            <Line x1={hand.annotations.middleFinger[3][0]} y1={hand.annotations.middleFinger[3][0]} x2={hand.annotations.middleFinger[3][1]} y2={hand.annotations.middleFinger[3][1]} style={{stroke:'green', strokeWidth:2}} />
+            {/* pinky */}
+            <Line x1={hand.annotations.pinky[0][0]} y1={hand.annotations.pinky[0][0]} x2={hand.annotations.pinky[0][1]} y2={hand.annotations.pinky[0][1]} style={{stroke:'green', strokeWidth:2}} />
+            <Line x1={hand.annotations.pinky[1][0]} y1={hand.annotations.pinky[1][0]} x2={hand.annotations.pinky[1][1]} y2={hand.annotations.pinky[1][1]} style={{stroke:'green', strokeWidth:2}} />
+            <Line x1={hand.annotations.pinky[2][0]} y1={hand.annotations.pinky[2][0]} x2={hand.annotations.pinky[2][1]} y2={hand.annotations.pinky[2][1]} style={{stroke:'green', strokeWidth:2}} />
+            <Line x1={hand.annotations.pinky[3][0]} y1={hand.annotations.pinky[3][0]} x2={hand.annotations.pinky[3][1]} y2={hand.annotations.pinky[3][1]} style={{stroke:'green', strokeWidth:2}} />
+            {/* ringFinger */}
+            <Line x1={hand.annotations.ringFinger[0][0]} y1={hand.annotations.ringFinger[0][0]} x2={hand.annotations.ringFinger[0][1]} y2={hand.annotations.ringFinger[0][1]} style={{stroke:'green', strokeWidth:2}} />
+            <Line x1={hand.annotations.ringFinger[1][0]} y1={hand.annotations.ringFinger[1][0]} x2={hand.annotations.ringFinger[1][1]} y2={hand.annotations.ringFinger[1][1]} style={{stroke:'green', strokeWidth:2}} />
+            <Line x1={hand.annotations.ringFinger[2][0]} y1={hand.annotations.ringFinger[2][0]} x2={hand.annotations.ringFinger[2][1]} y2={hand.annotations.ringFinger[2][1]} style={{stroke:'green', strokeWidth:2}} />
+            <Line x1={hand.annotations.ringFinger[3][0]} y1={hand.annotations.ringFinger[3][0]} x2={hand.annotations.ringFinger[3][1]} y2={hand.annotations.ringFinger[3][1]} style={{stroke:'green', strokeWidth:2}} />
+            {/* thumb */}
+            <Line x1={hand.annotations.thumb[0][0]} y1={hand.annotations.thumb[0][0]} x2={hand.annotations.thumb[0][1]} y2={hand.annotations.thumb[0][1]} style={{stroke:'green', strokeWidth:2}} />
+            <Line x1={hand.annotations.thumb[1][0]} y1={hand.annotations.thumb[1][0]} x2={hand.annotations.thumb[1][1]} y2={hand.annotations.thumb[1][1]} style={{stroke:'green', strokeWidth:2}} />
+            <Line x1={hand.annotations.thumb[2][0]} y1={hand.annotations.thumb[2][0]} x2={hand.annotations.thumb[2][1]} y2={hand.annotations.thumb[2][1]} style={{stroke:'green', strokeWidth:2}} />
+            <Line x1={hand.annotations.thumb[3][0]} y1={hand.annotations.thumb[3][0]} x2={hand.annotations.thumb[3][1]} y2={hand.annotations.thumb[3][1]} style={{stroke:'green', strokeWidth:2}} />
+            
+          {/* {console.log(hand.landmarks[0])} */}
+            {/* {hand.landmarks.map(landmark => {
+              <Circle cx={landmark[0]} cy={landmark[1]} r="1" stroke="blue" strokeWidth="2.5" fill="green"/>
+            })} */}
+          </Svg>
+          <Text style={styles.textContainer} key={`faceInfo${i}`}>
+            is hand probability: {hand.handInViewConfidence} | 
+          </Text>
+          </>
+         
+
+         
    });
   }
 
@@ -194,13 +251,12 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-
     width: '100%',
-    height: '85%',
+    height: '90%',
     backgroundColor: '#fff',
   },
   textContainer: {
-    paddingLeft: 30
+    paddingLeft: 40
   },
   camera : {
     position:'absolute',
