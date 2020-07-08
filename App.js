@@ -14,8 +14,8 @@ let frameCount = 0;
 const makePredictionEveryNFrames = 3;
 
 // Position of camera preview.
-const previewLeft = 0;
-const previewTop = 0;
+const previewLeft = 40;
+const previewTop = 40;
 const previewWidth = 290;
 const previewHeight = 500;
 
