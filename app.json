@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "experiment-05",
-    "slug": "experiment-05",
+    "name": "Handtrak-RN",
+    "slug": "handtrak-rn",
     "platforms": [
       "ios",
       "android",
@@ -23,6 +23,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "This is an experimental project of real-time hand tracking on react native using conventional neural network",
+    "githubUrl": "https://github.com/subodha/handtrack-RN"
   }
 }

@@ -116,7 +116,7 @@ export default class App extends React.Component {
       const rate = 1;
       
        return <>
-          <Svg height={previewHeight} width={previewWidth} viewBox={`0 0 290 440`} style={{ position: 'absolute', top: previewTop, left: previewLeft, opacity: 0.5}}>
+          <Svg height={previewHeight} width={previewWidth} viewBox={`0 0 290 500`} style={{ position: 'absolute', top: 100, left: 80, opacity: 0.5}}>
             <Circle cx={hand.landmarks[0][0] * rate} cy={hand.landmarks[0][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
             <Circle cx={hand.landmarks[1][0] * rate} cy={hand.landmarks[1][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
             <Circle cx={hand.landmarks[2][0] * rate} cy={hand.landmarks[2][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
@@ -173,9 +173,6 @@ export default class App extends React.Component {
             is hand probability: {hand.handInViewConfidence} | 
           </Text>
           </>
-         
-
-         
    });
   }
 
