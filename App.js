@@ -108,15 +108,13 @@ export default class App extends React.Component {
     const {hands, scale, textureDims} = this.state;
     
     return hands.map((hand, i) => {
-      // const {topLeft, bottomRight, probability} = face;
+      // const {topLeft, bottomRight, probability} = hand;
       // Render landmarks 
-      
-
-      //console.log(hand);
+      console.log(hand);
       const rate = 1;
       
-       return <>
-          <Svg height={previewHeight} width={previewWidth} viewBox={`0 0 290 500`} style={{ position: 'absolute', top: 100, left: 80, opacity: 0.5}}>
+      return <>
+          <Svg key={i} height={previewHeight} width={previewWidth} viewBox={`0 0 290 500`} style={{ position: 'absolute', top: 100, left: 80, opacity: 0.9}}>
             <Circle cx={hand.landmarks[0][0] * rate} cy={hand.landmarks[0][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
             <Circle cx={hand.landmarks[1][0] * rate} cy={hand.landmarks[1][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
             <Circle cx={hand.landmarks[2][0] * rate} cy={hand.landmarks[2][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
@@ -138,42 +136,48 @@ export default class App extends React.Component {
             <Circle cx={hand.landmarks[18][0] * rate} cy={hand.landmarks[18][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
             <Circle cx={hand.landmarks[19][0] * rate} cy={hand.landmarks[19][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
             <Circle cx={hand.landmarks[20][0] * rate} cy={hand.landmarks[20][1] * rate} r="5" stroke="blue" strokeWidth="2.5" fill="green"/>
+
             {/* indexFinger */}
-            <Line x1={hand.annotations.indexFinger[0][0]} y1={hand.annotations.indexFinger[0][0]} x2={hand.annotations.indexFinger[0][1]} y2={hand.annotations.indexFinger[0][1]} style={{stroke:'green', strokeWidth:2}} />
+            {/* <Line x1={hand.annotations.indexFinger[0][0]} y1={hand.annotations.indexFinger[0][0]} x2={hand.annotations.indexFinger[0][1]} y2={hand.annotations.indexFinger[0][1]} style={{stroke:'green', strokeWidth:2}} />
             <Line x1={hand.annotations.indexFinger[1][0]} y1={hand.annotations.indexFinger[1][0]} x2={hand.annotations.indexFinger[1][1]} y2={hand.annotations.indexFinger[1][1]} style={{stroke:'green', strokeWidth:2}} />
             <Line x1={hand.annotations.indexFinger[2][0]} y1={hand.annotations.indexFinger[2][0]} x2={hand.annotations.indexFinger[2][1]} y2={hand.annotations.indexFinger[2][1]} style={{stroke:'green', strokeWidth:2}} />
-            <Line x1={hand.annotations.indexFinger[3][0]} y1={hand.annotations.indexFinger[3][0]} x2={hand.annotations.indexFinger[3][1]} y2={hand.annotations.indexFinger[3][1]} style={{stroke:'green', strokeWidth:2}} />
+            <Line x1={hand.annotations.indexFinger[3][0]} y1={hand.annotations.indexFinger[3][0]} x2={hand.annotations.indexFinger[3][1]} y2={hand.annotations.indexFinger[3][1]} style={{stroke:'green', strokeWidth:2}} /> */}
+            
             {/* middleFinger */}
-            <Line x1={hand.annotations.middleFinger[0][0]} y1={hand.annotations.middleFinger[0][0]} x2={hand.annotations.middleFinger[0][1]} y2={hand.annotations.middleFinger[0][1]} style={{stroke:'green', strokeWidth:2}} />
+            {/* <Line x1={hand.annotations.middleFinger[0][0]} y1={hand.annotations.middleFinger[0][0]} x2={hand.annotations.middleFinger[0][1]} y2={hand.annotations.middleFinger[0][1]} style={{stroke:'green', strokeWidth:2}} />
             <Line x1={hand.annotations.middleFinger[1][0]} y1={hand.annotations.middleFinger[1][0]} x2={hand.annotations.middleFinger[1][1]} y2={hand.annotations.middleFinger[1][1]} style={{stroke:'green', strokeWidth:2}} />
             <Line x1={hand.annotations.middleFinger[2][0]} y1={hand.annotations.middleFinger[2][0]} x2={hand.annotations.middleFinger[2][1]} y2={hand.annotations.middleFinger[2][1]} style={{stroke:'green', strokeWidth:2}} />
-            <Line x1={hand.annotations.middleFinger[3][0]} y1={hand.annotations.middleFinger[3][0]} x2={hand.annotations.middleFinger[3][1]} y2={hand.annotations.middleFinger[3][1]} style={{stroke:'green', strokeWidth:2}} />
+            <Line x1={hand.annotations.middleFinger[3][0]} y1={hand.annotations.middleFinger[3][0]} x2={hand.annotations.middleFinger[3][1]} y2={hand.annotations.middleFinger[3][1]} style={{stroke:'green', strokeWidth:2}} /> */}
+            
             {/* pinky */}
-            <Line x1={hand.annotations.pinky[0][0]} y1={hand.annotations.pinky[0][0]} x2={hand.annotations.pinky[0][1]} y2={hand.annotations.pinky[0][1]} style={{stroke:'green', strokeWidth:2}} />
+            {/* <Line x1={hand.annotations.pinky[0][0]} y1={hand.annotations.pinky[0][0]} x2={hand.annotations.pinky[0][1]} y2={hand.annotations.pinky[0][1]} style={{stroke:'green', strokeWidth:2}} />
             <Line x1={hand.annotations.pinky[1][0]} y1={hand.annotations.pinky[1][0]} x2={hand.annotations.pinky[1][1]} y2={hand.annotations.pinky[1][1]} style={{stroke:'green', strokeWidth:2}} />
             <Line x1={hand.annotations.pinky[2][0]} y1={hand.annotations.pinky[2][0]} x2={hand.annotations.pinky[2][1]} y2={hand.annotations.pinky[2][1]} style={{stroke:'green', strokeWidth:2}} />
-            <Line x1={hand.annotations.pinky[3][0]} y1={hand.annotations.pinky[3][0]} x2={hand.annotations.pinky[3][1]} y2={hand.annotations.pinky[3][1]} style={{stroke:'green', strokeWidth:2}} />
+            <Line x1={hand.annotations.pinky[3][0]} y1={hand.annotations.pinky[3][0]} x2={hand.annotations.pinky[3][1]} y2={hand.annotations.pinky[3][1]} style={{stroke:'green', strokeWidth:2}} /> */}
+            
             {/* ringFinger */}
-            <Line x1={hand.annotations.ringFinger[0][0]} y1={hand.annotations.ringFinger[0][0]} x2={hand.annotations.ringFinger[0][1]} y2={hand.annotations.ringFinger[0][1]} style={{stroke:'green', strokeWidth:2}} />
+            {/* <Line x1={hand.annotations.ringFinger[0][0]} y1={hand.annotations.ringFinger[0][0]} x2={hand.annotations.ringFinger[0][1]} y2={hand.annotations.ringFinger[0][1]} style={{stroke:'green', strokeWidth:2}} />
             <Line x1={hand.annotations.ringFinger[1][0]} y1={hand.annotations.ringFinger[1][0]} x2={hand.annotations.ringFinger[1][1]} y2={hand.annotations.ringFinger[1][1]} style={{stroke:'green', strokeWidth:2}} />
             <Line x1={hand.annotations.ringFinger[2][0]} y1={hand.annotations.ringFinger[2][0]} x2={hand.annotations.ringFinger[2][1]} y2={hand.annotations.ringFinger[2][1]} style={{stroke:'green', strokeWidth:2}} />
-            <Line x1={hand.annotations.ringFinger[3][0]} y1={hand.annotations.ringFinger[3][0]} x2={hand.annotations.ringFinger[3][1]} y2={hand.annotations.ringFinger[3][1]} style={{stroke:'green', strokeWidth:2}} />
+            <Line x1={hand.annotations.ringFinger[3][0]} y1={hand.annotations.ringFinger[3][0]} x2={hand.annotations.ringFinger[3][1]} y2={hand.annotations.ringFinger[3][1]} style={{stroke:'green', strokeWidth:2}} /> */}
+            
             {/* thumb */}
-            <Line x1={hand.annotations.thumb[0][0]} y1={hand.annotations.thumb[0][0]} x2={hand.annotations.thumb[0][1]} y2={hand.annotations.thumb[0][1]} style={{stroke:'green', strokeWidth:2}} />
+            {/* <Line x1={hand.annotations.thumb[0][0]} y1={hand.annotations.thumb[0][0]} x2={hand.annotations.thumb[0][1]} y2={hand.annotations.thumb[0][1]} style={{stroke:'green', strokeWidth:2}} />
             <Line x1={hand.annotations.thumb[1][0]} y1={hand.annotations.thumb[1][0]} x2={hand.annotations.thumb[1][1]} y2={hand.annotations.thumb[1][1]} style={{stroke:'green', strokeWidth:2}} />
             <Line x1={hand.annotations.thumb[2][0]} y1={hand.annotations.thumb[2][0]} x2={hand.annotations.thumb[2][1]} y2={hand.annotations.thumb[2][1]} style={{stroke:'green', strokeWidth:2}} />
-            <Line x1={hand.annotations.thumb[3][0]} y1={hand.annotations.thumb[3][0]} x2={hand.annotations.thumb[3][1]} y2={hand.annotations.thumb[3][1]} style={{stroke:'green', strokeWidth:2}} />
+            <Line x1={hand.annotations.thumb[3][0]} y1={hand.annotations.thumb[3][0]} x2={hand.annotations.thumb[3][1]} y2={hand.annotations.thumb[3][1]} style={{stroke:'green', strokeWidth:2}} /> */}
             
-          {/* {console.log(hand.landmarks[0])} */}
+            {/* {console.log(hand.landmarks[0])} */}
             {/* {hand.landmarks.map(landmark => {
               <Circle cx={landmark[0]} cy={landmark[1]} r="1" stroke="blue" strokeWidth="2.5" fill="green"/>
             })} */}
+
           </Svg>
           <Text style={styles.textContainer} key={`faceInfo${i}`}>
             is hand probability: {hand.handInViewConfidence} | 
           </Text>
           </>
-   });
+    });
   }
 
   renderMain() {
@@ -196,7 +200,6 @@ export default class App extends React.Component {
       />      
     </View>;
 
-   
     return (
       <View>
         {camView}
